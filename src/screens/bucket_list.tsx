@@ -65,7 +65,7 @@ function BucketListScreen(props: Props){
 
   const [checked, setChecked] = React.useState(false);
 
-  const onCheckedChange = (isChecked) => {
+  const onCheckedChange = (isChecked: boolean) => {
     setChecked(isChecked);
   };
 

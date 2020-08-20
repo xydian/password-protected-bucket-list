@@ -6,19 +6,19 @@ interface Props {
   eva?: EvaProp
 }
 
-const EditIcon = (props) => (
-  <Icon {...props} name='edit'/>
+const EditIcon = (props: any) => (
+  <Icon {...props} name='plus'/>
 );
 
-const MenuIcon = (props) => (
+const MenuIcon = (props: any) => (
   <Icon {...props} name='more-vertical'/>
 );
 
-const InfoIcon = (props) => (
+const InfoIcon = (props: any) => (
   <Icon {...props} name='info'/>
 );
 
-const LogoutIcon = (props) => (
+const LogoutIcon = (props: any) => (
   <Icon {...props} name='log-out'/>
 );
 
@@ -40,7 +40,7 @@ function NavigationBar(props: Props){
         visible={menuVisible}
         onBackdropPress={toggleMenu}>
         <MenuItem accessoryLeft={InfoIcon} title='About'/>
-        <MenuItem accessoryLeft={LogoutIcon} title='Logout'/>
+        <MenuItem accessoryLeft={LogoutIcon} title='Sperren'/>
       </OverflowMenu>
     </React.Fragment>
   );
