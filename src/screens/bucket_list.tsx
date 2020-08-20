@@ -3,44 +3,13 @@ import { View } from 'react-native'
 import { withStyles, Layout, ListItem, List, EvaProp, Divider, CheckBox, StyleType, Toggle } from '@ui-kitten/components'
 import { NewListItemModal } from './new_list_item';
 import { NavigationBar } from '../components/navigation_bar';
-
-interface BucketListItem {
-  id: number
-  title: string 
-  conditions: string 
-  performed: boolean
-}
-
-const listItems: BucketListItem[] = [
-  {
-    id: 1, 
-    title: 'Visit Spain', 
-    conditions: 'Balearen zählen nicht', 
-    performed: false 
-  },
-  {
-    id: 2, 
-    title: 'Visit Spain123', 
-    conditions: 'Balearen zählen nicht', 
-    performed: true 
-  },
-  {
-    id: 3, 
-    title: 'Visit Spain1234', 
-    conditions: 'Balearen zählen nicht', 
-    performed: false 
-  },
-  {
-    id: 4, 
-    title: 'Visit Spain455', 
-    conditions: 'Balearen zählen nicht', 
-    performed: true 
-  },
-]
+import { BucketListItem } from '../BucketListItem';
 
 interface Props {
   modalVisible: boolean
   closeModal: () => void
+
+  listItems: BucketListItem[]
 
   eva?: EvaProp
 }
@@ -52,7 +21,7 @@ function BucketListScreen(props: Props){
       description={`${item.conditions} ${index + 1}`}
       // appearance='alternative'
       // accessory={(style: StyleType, index: number) => renderAccessory(style, item.id)}
-      accessoryRight={(props) => renderAccessory(props, item.id)}
+      accessoryRight={(props) => renderAccessory(props, item)}
     />
   );
 
@@ -60,11 +29,11 @@ function BucketListScreen(props: Props){
 
   }
 
-  const renderAccessory = (props: any, id: number) => (
+  const renderAccessory = (props: any, item: BucketListItem) => (
     <CheckBox
       {...props}
-      checked={true}
-      onChange={() => onCheckBoxCheckedChange(id)}
+      checked={item.performed}
+      onChange={() => onCheckBoxCheckedChange(item.id)}
     /> 
   ); 
 
@@ -89,7 +58,7 @@ function BucketListScreen(props: Props){
 
       <List
         style={props.eva.style.container} 
-        data={listItems}
+        data={props.listItems}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}
       />
