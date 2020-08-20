@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
-import { withStyles, Layout, ListItem, List, EvaProp, Divider, CheckBox, StyleType, Toggle } from '@ui-kitten/components'
-import { NewListItemModal } from './new_list_item';
-import { NavigationBar } from '../components/navigation_bar';
+import { withStyles, Layout, ListItem, List, EvaProp, Divider, CheckBox, Toggle } from '@ui-kitten/components'
 import { BucketListItem } from '../BucketListItem';
 
 interface Props {
