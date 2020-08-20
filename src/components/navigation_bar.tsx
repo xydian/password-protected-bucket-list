@@ -3,6 +3,8 @@ import { withStyles, TopNavigation, EvaProp, TopNavigationAction, Icon, Overflow
 import { StatusBar } from 'react-native'
 
 interface Props {
+  signOutCallback: () => void
+
   eva?: EvaProp
 }
 
@@ -40,7 +42,7 @@ function NavigationBar(props: Props){
         visible={menuVisible}
         onBackdropPress={toggleMenu}>
         <MenuItem accessoryLeft={InfoIcon} title='About'/>
-        <MenuItem accessoryLeft={LogoutIcon} title='Sperren'/>
+        <MenuItem accessoryLeft={LogoutIcon} title='Sperren' onPress={props.signOutCallback} />
       </OverflowMenu>
     </React.Fragment>
   );

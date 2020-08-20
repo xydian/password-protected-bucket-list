@@ -1227,6 +1227,11 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
+"@rnhooks/async-storage@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@rnhooks/async-storage/-/async-storage-0.0.1.tgz#1ab094b92e2ed74cdaf183def581c1f1f573e42c"
+  integrity sha512-Stqn1mhzjg8N3nDE92Hddw9N/HTKe5OhPONeeyL1++qCd2EWhSGneylEiasYTqDcCa+TvtLU9d/7b9I51lEUGg==
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
