@@ -50,7 +50,7 @@ function NewListItemModal(props: Props){
 
           <Button 
             onPress={props.closeCallback} 
-            appearance='outline'
+            status='basic'
           >
             abbrechen
           </Button>

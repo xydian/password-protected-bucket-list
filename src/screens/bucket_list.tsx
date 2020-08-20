@@ -17,13 +17,11 @@ interface Props {
 function BucketListScreen(props: Props){
   const renderItem = ({ item, index }: { item: BucketListItem, index: number }) => (
     <ListItem
-      title={`${item.title} ${index + 1}`}
-      description={`${item.conditions} ${index + 1}`}
-      // appearance='alternative'
-      // accessory={(style: StyleType, index: number) => renderAccessory(style, item.id)}
+      title={item.title}
+      description={item.conditions}
       accessoryRight={(props) => renderAccessory(props, item)}
     />
-  );
+  )
 
   const onCheckBoxCheckedChange = (id: number) => {
 
@@ -35,15 +33,13 @@ function BucketListScreen(props: Props){
       checked={item.performed}
       onChange={() => onCheckBoxCheckedChange(item.id)}
     /> 
-  ); 
+  )
 
   const [checked, setChecked] = React.useState(false);
 
   const onCheckedChange = (isChecked: boolean) => {
     setChecked(isChecked);
-  };
-
-  
+  }
 
   return (
     <Layout level='2'>
