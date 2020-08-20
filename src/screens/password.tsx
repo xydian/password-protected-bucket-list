@@ -43,6 +43,8 @@ function PasswordScreen(props: Props){
         value={value}
         onChangeText={nextValue => setValue(nextValue)}
         style={{marginTop: 20, marginBottom: 20}}
+        autoCompleteType='password'
+        secureTextEntry
       />
       <Button 
         onPress={onPressSignIn}

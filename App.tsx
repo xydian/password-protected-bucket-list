@@ -5,65 +5,24 @@ import { BucketListScreen } from './src/screens/bucket_list';
 import { StatusBar, View } from 'react-native';
 import { NavigationBar } from './src/components/navigation_bar';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-// @ts-ignore
-import useAsyncStorage from '@rnhooks/async-storage'
 import { asyncStorageKeys } from './src/asyncStorageKeys';
 import { PasswordScreen } from './src/screens/password';
 import { NewListItemModal } from './src/screens/new_list_item';
 import { BucketListItem } from './src/BucketListItem';
-
-const LIST_ITEMS: BucketListItem[] = [
-  {
-    id: 1, 
-    title: 'Visit Spain', 
-    conditions: 'Balearen zählen nicht', 
-    performed: false 
-  },
-  {
-    id: 2, 
-    title: 'Visit Spain123', 
-    conditions: 'Balearen zählen nicht', 
-    performed: true 
-  },
-  {
-    id: 3, 
-    title: 'Visit Spain1234', 
-    conditions: 'Balearen zählen nicht', 
-    performed: false 
-  },
-  {
-    id: 4, 
-    title: 'Visit Spain455', 
-    conditions: 'Balearen zählen nicht', 
-    performed: true 
-  },
-]
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function App() {
-  const [ 
-    storageItem, 
-    updateStorageItem, 
-    clearStorageItem 
-  ] = useAsyncStorage(asyncStorageKeys.password)
-  
-  const [ 
-    storageListItems, 
-    updateStorageListItems, 
-    clearStorageListItems 
-  ] = useAsyncStorage(asyncStorageKeys.listItems)
-
   const [ listItems, setListItems ] = useState<BucketListItem[]>([])
 
   const parseListItems = async () => {
     try {
+      const storageListItems = await AsyncStorage.getItem(asyncStorageKeys.listItems)
       const listItemsOfStorage: BucketListItem[] = await JSON.parse(storageListItems)
       if (Array.isArray(listItemsOfStorage)){
         setListItems(listItemsOfStorage)
       } else {
         setListItems([])
       }
-      console.log(listItemsOfStorage)
-      console.log(storageListItems)   
     } catch (e){
       alert(e)
     }  
@@ -90,7 +49,7 @@ export default function App() {
     setNewListItemModal(false)
   }
 
-  const onPressAddListItem = (title: string, conditions: string) => {
+  const onPressAddListItem = async (title: string, conditions: string) => {
     const listItem: BucketListItem = {
       id: Math.random(), 
       title: title, 
@@ -101,7 +60,8 @@ export default function App() {
     const newListItems = [ listItem, ...listItems ]
 
     setListItems(newListItems)
-    updateStorageListItems(JSON.stringify(newListItems))
+    // updateStorageListItems(JSON.stringify(newListItems))
+    await AsyncStorage.setItem(asyncStorageKeys.listItems, JSON.stringify(newListItems))
     console.log('new list items')
     console.log(JSON.stringify(newListItems))
     closeModal()
