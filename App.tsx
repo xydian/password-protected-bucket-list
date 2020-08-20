@@ -40,11 +40,39 @@ const LIST_ITEMS: BucketListItem[] = [
 ]
 
 export default function App() {
-  const [ storageItem, updateStorageItem, clearStorageItem ] = useAsyncStorage(asyncStorageKeys.password)
+  const [ 
+    storageItem, 
+    updateStorageItem, 
+    clearStorageItem 
+  ] = useAsyncStorage(asyncStorageKeys.password)
   
-  const [ listItems, setListItems ] = useState(LIST_ITEMS)
+  const [ 
+    storageListItems, 
+    updateStorageListItems, 
+    clearStorageListItems 
+  ] = useAsyncStorage(asyncStorageKeys.listItems)
 
-  // const [ password, setPassword ] = useState(storageItem == undefined ? '' : storageItem)
+  const [ listItems, setListItems ] = useState<BucketListItem[]>([])
+
+  const parseListItems = async () => {
+    try {
+      const listItemsOfStorage: BucketListItem[] = await JSON.parse(storageListItems)
+      if (Array.isArray(listItemsOfStorage)){
+        setListItems(listItemsOfStorage)
+      } else {
+        setListItems([])
+      }
+      console.log(listItemsOfStorage)
+      console.log(storageListItems)   
+    } catch (e){
+      alert(e)
+    }  
+  }  
+
+  useEffect(() => {
+    parseListItems()
+  }, []) 
+
   const [ signedIn, setSignedIn ] = useState(false)
   const signIn = () => {
     setSignedIn(true)
@@ -52,10 +80,6 @@ export default function App() {
   const signOut = () => {
     setSignedIn(false)
   }
-
-  useEffect(() => {
-
-  }, [])
 
   const [ newListItemModal, setNewListItemModal ] = useState(false)
   const openModal = () => {
@@ -77,8 +101,11 @@ export default function App() {
     const newListItems = [ listItem, ...listItems ]
 
     setListItems(newListItems)
+    updateStorageListItems(JSON.stringify(newListItems))
+    console.log('new list items')
+    console.log(JSON.stringify(newListItems))
     closeModal()
-  }
+  } 
 
   return (
     <>

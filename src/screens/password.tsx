@@ -14,7 +14,7 @@ interface Props {
 
 function PasswordScreen(props: Props){
   const [ storageItem, updateStorageItem, clearStorageItem ] = useAsyncStorage(asyncStorageKeys.password)
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(__DEV__ ? 'Test1234' : '');
 
   const onPressSignIn = () => {
     if (storageItem == undefined){
@@ -50,14 +50,6 @@ function PasswordScreen(props: Props){
       >
         { storageItem != undefined ? 'Entsperren' : 'Neues Passwort festlegen' }
       </Button>
-
-      {__DEV__ && 
-        <Button 
-          onPress={clearStorageItem}
-        >
-          Passwort zurücksetzen
-        </Button>
-      }
     </Layout>
   )
 }
