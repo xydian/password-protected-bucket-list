@@ -11,12 +11,6 @@ import { asyncStorageKeys } from './src/asyncStorageKeys';
 import { PasswordScreen } from './src/screens/password';
 import { NewListItemModal } from './src/screens/new_list_item';
 
-const HomeScreen = () => (
-  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text category='h1'>HOME</Text>
-  </Layout>
-);
-
 export default function App() {
   const [ storageItem, updateStorageItem, clearStorageItem ] = useAsyncStorage(asyncStorageKeys.password)
   
