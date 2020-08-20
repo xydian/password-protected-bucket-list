@@ -9,6 +9,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import useAsyncStorage from '@rnhooks/async-storage'
 import { asyncStorageKeys } from './src/asyncStorageKeys';
 import { PasswordScreen } from './src/screens/password';
+import { NewListItemModal } from './src/screens/new_list_item';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -32,6 +33,15 @@ export default function App() {
 
   }, [])
 
+  const [ newListItemModal, setNewListItemModal ] = useState(false)
+  const openModal = () => {
+    setNewListItemModal(true)
+  }
+
+  const closeModal = () => {
+    setNewListItemModal(false)
+  }
+
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
@@ -40,8 +50,14 @@ export default function App() {
           <PasswordScreen signInCallback={signIn} />
           : 
           <>
-            <NavigationBar signOutCallback={signOut} />
-            <BucketListScreen />
+            <NavigationBar signOutCallback={signOut} onPressAdd={openModal} />
+            <BucketListScreen modalVisible={newListItemModal} closeModal={closeModal} />
+
+            {/* modal to add new list item */}
+            <NewListItemModal 
+              visible={newListItemModal} 
+              closeCallback={closeModal}
+            />
           </>
         }
       </ApplicationProvider>

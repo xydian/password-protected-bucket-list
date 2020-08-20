@@ -4,6 +4,7 @@ import { StatusBar } from 'react-native'
 
 interface Props {
   signOutCallback: () => void
+  onPressAdd: () => void
 
   eva?: EvaProp
 }
@@ -36,7 +37,7 @@ function NavigationBar(props: Props){
 
   const renderRightActions = () => (
     <React.Fragment>
-      <TopNavigationAction icon={EditIcon}/>
+      <TopNavigationAction icon={EditIcon} onPress={props.onPressAdd} />
       <OverflowMenu
         anchor={renderMenuAction}
         visible={menuVisible}

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import { withStyles, Layout, ListItem, List, EvaProp, Divider, CheckBox, StyleType, Toggle } from '@ui-kitten/components'
+import { NewListItemModal } from './new_list_item';
+import { NavigationBar } from '../components/navigation_bar';
 
 interface BucketListItem {
   id: number
@@ -37,6 +39,9 @@ const listItems: BucketListItem[] = [
 ]
 
 interface Props {
+  modalVisible: boolean
+  closeModal: () => void
+
   eva?: EvaProp
 }
 
@@ -68,6 +73,8 @@ function BucketListScreen(props: Props){
   const onCheckedChange = (isChecked: boolean) => {
     setChecked(isChecked);
   };
+
+  
 
   return (
     <Layout level='2'>
