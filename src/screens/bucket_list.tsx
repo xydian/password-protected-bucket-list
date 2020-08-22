@@ -20,8 +20,23 @@ function BucketListScreen(props: Props){
       title={item.title}
       description={item.conditions}
       accessoryRight={(props) => renderAccessory(props, item)}
+      key={item.id}
     />
   )
+
+  const renderListItems = () => {
+    const renderedItems: any[] = []
+
+    props.listItems.forEach((el, i) => {
+      if (el.performed && !showExecuted){
+        return 
+      }
+      renderedItems.push(renderItem({ item: el, index: i}))
+      renderedItems.push(<Divider />)
+    })
+
+    return renderedItems
+  }
 
   const renderAccessory = (accessoryProps: any, item: BucketListItem) => (
     <CheckBox
@@ -31,10 +46,10 @@ function BucketListScreen(props: Props){
     /> 
   )
 
-  const [checked, setChecked] = React.useState(false);
+  const [ showExecuted, setShowExecuted ] = React.useState(false);
 
   const onCheckedChange = (isChecked: boolean) => {
-    setChecked(isChecked);
+    setShowExecuted(isChecked);
   }
 
   return (
@@ -43,17 +58,19 @@ function BucketListScreen(props: Props){
         alignItems: 'flex-start',
         margin: 14, 
       }}>
-        <Toggle checked={checked} onChange={onCheckedChange}>
+        <Toggle checked={showExecuted} onChange={onCheckedChange}>
           Ausgeführte anzeigen
         </Toggle>
       </View>
 
-      <List
+      {/* <List
         style={props.eva.style.container} 
         data={props.listItems}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}
-      />
+      /> */}
+
+      {renderListItems()}
     </Layout>
   )
 }
