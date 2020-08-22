@@ -6,6 +6,9 @@ interface Props {
   signOutCallback: () => void
   onPressAdd: () => void
 
+  darkMode: boolean
+  toggleDarkMode: () => void
+
   eva?: EvaProp
 }
 
@@ -43,6 +46,7 @@ function NavigationBar(props: Props){
         visible={menuVisible}
         onBackdropPress={toggleMenu}>
         <MenuItem accessoryLeft={InfoIcon} title='About'/>
+        <MenuItem accessoryLeft={LogoutIcon} title={props.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={props.toggleDarkMode} />
         <MenuItem accessoryLeft={LogoutIcon} title='Sperren' onPress={props.signOutCallback} />
       </OverflowMenu>
     </React.Fragment>
@@ -52,7 +56,11 @@ function NavigationBar(props: Props){
     <TopNavigation
       // accessoryLeft={BackAction}
       title='Bucket List'
-      style={{marginTop: StatusBar.currentHeight, borderBottomWidth: 1, borderBottomColor: props.eva.theme['color-basic-transparent-400']}}
+      style={{
+        marginTop: StatusBar.currentHeight, 
+        borderBottomWidth: 1, 
+        borderBottomColor: props.eva.theme['color-basic-transparent-400'],
+      }}
       accessoryRight={renderRightActions}
     />
   )

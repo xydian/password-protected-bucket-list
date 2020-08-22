@@ -65,7 +65,7 @@ export default function App() {
   }
 
   const onPressListItem = (id: number) => {
-    
+
   }
 
   const onPressAddListItem = async (title: string, conditions: string) => {
@@ -86,15 +86,22 @@ export default function App() {
     closeModal()
   } 
 
+  const [ darkMode, setDarkMode ] = useState(false)
+
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.light}>
+      <ApplicationProvider {...eva} theme={darkMode ? eva.dark : eva.light}>
         {!signedIn ? 
           <PasswordScreen signInCallback={signIn} />
           : 
-          <>
-            <NavigationBar signOutCallback={signOut} onPressAdd={openModal} />
+          <Layout style={{flex: 1}}>
+            <NavigationBar 
+              signOutCallback={signOut} 
+              onPressAdd={openModal} 
+              darkMode={darkMode}
+              toggleDarkMode={() => {setDarkMode(!darkMode)}}
+            />
             <BucketListScreen 
               modalVisible={newListItemModal} 
               closeModal={closeModal} 
@@ -109,7 +116,7 @@ export default function App() {
               closeCallback={closeModal}
               onPressAddListItem={onPressAddListItem}
             />
-          </>
+          </Layout>
         }
       </ApplicationProvider>
     </>
