@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text, TopNavigation, IconRegistry } from '@ui-kitten/components';
+import { ApplicationProvider, Layout, Text, TopNavigation, IconRegistry, ListItem } from '@ui-kitten/components';
 import { BucketListScreen } from './src/screens/bucket_list';
 import { StatusBar, View } from 'react-native';
 import { NavigationBar } from './src/components/navigation_bar';
@@ -49,6 +49,25 @@ export default function App() {
     setNewListItemModal(false)
   }
 
+  const onCheckListItem = (id: number) => {
+    const newListItems: BucketListItem[] = []
+
+    listItems.forEach(el => {
+      const listItem: BucketListItem = { ...el } 
+      if (el.id === id){
+        listItem.performed = !listItem.performed
+      } 
+      newListItems.push(listItem)
+    })
+
+    setListItems(newListItems)
+    AsyncStorage.setItem(asyncStorageKeys.listItems, JSON.stringify(newListItems))
+  }
+
+  const onPressListItem = (id: number) => {
+    
+  }
+
   const onPressAddListItem = async (title: string, conditions: string) => {
     const listItem: BucketListItem = {
       id: Math.random(), 
@@ -80,6 +99,8 @@ export default function App() {
               modalVisible={newListItemModal} 
               closeModal={closeModal} 
               listItems={listItems}
+              onCheckListItem={onCheckListItem}
+              onPressListItem={onPressListItem}
             />
 
             {/* modal to add new list item */}

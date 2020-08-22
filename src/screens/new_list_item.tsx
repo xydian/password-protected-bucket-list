@@ -32,7 +32,7 @@ function NewListItemModal(props: Props){
         <Input
           multiline={true}
           textStyle={{ minHeight: 64 }}
-          placeholder='Bedingungen'
+          placeholder='Bedingungen die erfüllt sein müssen um den Punkt abzuhaken'
           onChangeText={setConditions}
         />
 
@@ -42,7 +42,7 @@ function NewListItemModal(props: Props){
           marginTop: 12, 
         }}>
           <Button 
-            disabled={title === '' || conditions === ''}
+            disabled={title === ''}
             onPress={() => props.onPressAddListItem(title, conditions)}
           >
             hinzufügen

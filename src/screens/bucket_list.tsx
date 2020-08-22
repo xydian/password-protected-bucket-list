@@ -8,6 +8,8 @@ interface Props {
   closeModal: () => void
 
   listItems: BucketListItem[]
+  onCheckListItem: (id: number) => void
+  onPressListItem: (id: number) => void
 
   eva?: EvaProp
 }
@@ -21,15 +23,11 @@ function BucketListScreen(props: Props){
     />
   )
 
-  const onCheckBoxCheckedChange = (id: number) => {
-
-  }
-
-  const renderAccessory = (props: any, item: BucketListItem) => (
+  const renderAccessory = (accessoryProps: any, item: BucketListItem) => (
     <CheckBox
-      {...props}
+      {...accessoryProps}
       checked={item.performed}
-      onChange={() => onCheckBoxCheckedChange(item.id)}
+      onChange={() => props.onCheckListItem(item.id)}
     /> 
   )
 
