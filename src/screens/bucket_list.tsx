@@ -10,6 +10,7 @@ interface Props {
   listItems: BucketListItem[]
   onCheckListItem: (id: number) => void
   onPressListItem: (id: number) => void
+  onDeleteListItem: (id: number) => void
 
   eva?: EvaProp
 }
@@ -21,6 +22,7 @@ function BucketListScreen(props: Props){
       description={item.conditions}
       accessoryRight={(props) => renderAccessory(props, item)}
       key={item.id}
+      onLongPress={() => props.onDeleteListItem(item.id)}
     />
   )
 

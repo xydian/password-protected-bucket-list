@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as eva from '@eva-design/eva'
-import { ApplicationProvider, Layout, Text, TopNavigation, IconRegistry, ListItem } from '@ui-kitten/components'
+import { ApplicationProvider, Layout, IconRegistry } from '@ui-kitten/components'
 import { BucketListScreen } from './src/screens/bucket_list'
 import { NavigationBar } from './src/components/navigation_bar'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
@@ -10,10 +10,19 @@ import { NewListItemModal } from './src/components/new_list_item_modal'
 import { BucketListItem } from './src/BucketListItem'
 import AsyncStorage from '@react-native-community/async-storage'
 import { setStatusBarStyle } from 'expo-status-bar'
-import { Provider } from 'react-redux' 
-import { store } from './src/redux/store'
+import { Provider, useSelector } from 'react-redux' 
+import { store, RootState } from './src/redux/store'
+import { AppState } from './src/redux/appReducer'
  
-export default function App() {
+export default function AppProvider(){
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+}
+
+export function App() {
   const [ listItems, setListItems ] = useState<BucketListItem[]>([])
 
   const parseListItems = async () => {
@@ -65,9 +74,21 @@ export default function App() {
     AsyncStorage.setItem(asyncStorageKeys.listItems, JSON.stringify(newListItems))
   }
 
-  const onPressListItem = (id: number) => {
+  const onDeleteListItem = (id: number) => {
+    const newListItems: BucketListItem[] = []
 
+    listItems.forEach(el => {
+      const listItem: BucketListItem = { ...el } 
+      if (el.id !== id){
+        newListItems.push(listItem)
+      } 
+    })
+
+    setListItems(newListItems)
+    AsyncStorage.setItem(asyncStorageKeys.listItems, JSON.stringify(newListItems))
   }
+
+  const onPressListItem = (id: number) => {}
 
   const onPressAddListItem = async (title: string, conditions: string) => {
     const listItem: BucketListItem = {
@@ -84,19 +105,16 @@ export default function App() {
     closeModal()
   } 
 
-  const [ darkMode, setDarkMode ] = useState(false)
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
+  const appState: AppState = useSelector((state: RootState) => state)
   // change status bar style when dark mode is enabled/disabled
   useEffect(() => {
-    setStatusBarStyle(!darkMode ? 'dark' : 'light')
-  }, [darkMode])
+    setStatusBarStyle(!appState.darkMode ? 'dark' : 'light')
+  }, [appState.darkMode])
 
   return (
-    <Provider store={store}>
+    <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={darkMode ? eva.dark : eva.light}>
+      <ApplicationProvider {...eva} theme={appState.darkMode ? eva.dark : eva.light}>
         {!signedIn ? 
           <PasswordScreen signInCallback={signIn} />
           : 
@@ -104,8 +122,6 @@ export default function App() {
             <NavigationBar 
               signOutCallback={signOut} 
               onPressAdd={openModal} 
-              darkMode={darkMode}
-              toggleDarkMode={toggleDarkMode}
             />
             <BucketListScreen 
               modalVisible={newListItemModal} 
@@ -113,6 +129,7 @@ export default function App() {
               listItems={listItems}
               onCheckListItem={onCheckListItem}
               onPressListItem={onPressListItem}
+              onDeleteListItem={onDeleteListItem}
             />
 
             {/* modal to add new list item */}
@@ -124,6 +141,6 @@ export default function App() {
           </Layout>
         }
       </ApplicationProvider>
-    </Provider>
+    </>
   )
 }

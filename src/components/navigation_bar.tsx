@@ -15,18 +15,21 @@ import {
   InfoIcon, 
   LogoutIcon 
 } from './icon_components';
+import { AppState, toggleDarkMode } from '../redux/appReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
 
 interface Props {
   signOutCallback: () => void
   onPressAdd: () => void
 
-  darkMode: boolean
-  toggleDarkMode: () => void
-
   eva?: EvaProp
 }
 
 function NavigationBar(props: Props){
+  const appState: AppState = useSelector((state: RootState) => state)
+  const dispatch = useDispatch()
+
   const [menuVisible, setMenuVisible] = React.useState(false);
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -45,7 +48,7 @@ function NavigationBar(props: Props){
         onBackdropPress={toggleMenu}
       >
         <MenuItem accessoryLeft={InfoIcon} title='About'/>
-        <MenuItem accessoryLeft={DarkModeIcon} title={props.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={props.toggleDarkMode} />
+        <MenuItem accessoryLeft={DarkModeIcon} title={appState.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={() => dispatch(toggleDarkMode())} />
         <MenuItem accessoryLeft={LogoutIcon} title='Sperren' onPress={props.signOutCallback} />
       </OverflowMenu>
     </React.Fragment>
@@ -55,18 +58,18 @@ function NavigationBar(props: Props){
     <TopNavigation
       // accessoryLeft={BackAction}
       title='Bucket List'
-      style={{
-        marginTop: StatusBar.currentHeight, 
-        borderBottomWidth: 1, 
-        borderBottomColor: props.eva.theme['color-basic-transparent-400'],
-      }}
+      style={props.eva.style.topNavigation}
       accessoryRight={renderRightActions}
     />
   )
 }
 
 const StyledNavigationBar = withStyles(NavigationBar, theme => ({
-
+  topNavigation: {
+    marginTop: StatusBar.currentHeight, 
+    borderBottomWidth: 1, 
+    borderBottomColor: theme['color-basic-transparent-400'],
+  }
 }))
 
 export { StyledNavigationBar as NavigationBar }
