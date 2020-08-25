@@ -49,7 +49,7 @@ function NavigationBar(props: Props){
         onBackdropPress={toggleMenu}
       >
         <MenuItem accessoryLeft={HelpIcon} title='Hilfe' onPress={() => alert('Halten Sie einen Eintrag lange gedrückt um ihn zu löschen')} />
-        <MenuItem accessoryLeft={InfoIcon} title='About'/>
+        {/* <MenuItem accessoryLeft={InfoIcon} title='About'/> */}
         <MenuItem accessoryLeft={DarkModeIcon} title={appState.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={() => dispatch(toggleDarkMode())} />
         <MenuItem accessoryLeft={LogoutIcon} title='Sperren' onPress={props.signOutCallback} />
       </OverflowMenu>
