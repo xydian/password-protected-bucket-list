@@ -40,6 +40,16 @@ function NavigationBar(props: Props){
     <TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
   )
 
+  const onPressHelp = () => {
+    alert('Halten Sie einen Eintrag lange gedrückt um ihn zu löschen')
+    setMenuVisible(false)
+  }
+
+  const onPressDarkMode = () => {
+    dispatch(toggleDarkMode())
+    setMenuVisible(false)
+  }
+
   const renderRightActions = () => (
     <React.Fragment>
       <TopNavigationAction icon={EditIcon} onPress={props.onPressAdd} />
@@ -48,9 +58,9 @@ function NavigationBar(props: Props){
         visible={menuVisible}
         onBackdropPress={toggleMenu}
       >
-        <MenuItem accessoryLeft={HelpIcon} title='Hilfe' onPress={() => alert('Halten Sie einen Eintrag lange gedrückt um ihn zu löschen')} />
+        <MenuItem accessoryLeft={HelpIcon} title='Hilfe' onPress={onPressHelp} />
         {/* <MenuItem accessoryLeft={InfoIcon} title='About'/> */}
-        <MenuItem accessoryLeft={DarkModeIcon} title={appState.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={() => dispatch(toggleDarkMode())} />
+        <MenuItem accessoryLeft={DarkModeIcon} title={appState.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={onPressDarkMode} />
         <MenuItem accessoryLeft={LogoutIcon} title='Sperren' onPress={props.signOutCallback} />
       </OverflowMenu>
     </React.Fragment>
