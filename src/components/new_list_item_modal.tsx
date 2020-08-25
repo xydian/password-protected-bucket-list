@@ -15,6 +15,7 @@ function NewListItemModal(props: Props){
   const [ title, setTitle ] = useState('')
   const [ conditions, setConditions ] = useState('')
 
+  // we use this to apply a bottom padding to modal when keyboard is open
   const keyboard = useKeyboard()
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { withStyles, Layout, ListItem, List, EvaProp, Divider, CheckBox, Toggle } from '@ui-kitten/components'
 import { BucketListItem } from '../BucketListItem';
 
@@ -53,7 +53,7 @@ function BucketListScreen(props: Props){
   }
 
   return (
-    <Layout level='2'>
+    <Layout level='2' style={{flex: 1}}>
       <View style={{
         alignItems: 'flex-start',
         margin: 14, 
@@ -63,14 +63,9 @@ function BucketListScreen(props: Props){
         </Toggle>
       </View>
 
-      {/* <List
-        style={props.eva.style.container} 
-        data={props.listItems}
-        ItemSeparatorComponent={Divider}
-        renderItem={renderItem}
-      /> */}
-
-      {renderListItems()}
+      <ScrollView>
+        {renderListItems()}
+      </ScrollView>
     </Layout>
   )
 }
