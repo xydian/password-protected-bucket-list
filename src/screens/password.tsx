@@ -33,7 +33,7 @@ function PasswordScreen(props: Props){
     <Layout style={{
       marginTop: StatusBar.currentHeight, 
       flex: 1, 
-      margin: 20, 
+      padding: 20, 
       // marginTop: 50, 
       justifyContent: 'center'
     }}>

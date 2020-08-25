@@ -28,6 +28,10 @@ const LogoutIcon = (props: any) => (
   <Icon {...props} name='log-out'/>
 );
 
+const DarkModeIcon = (props:any) => (
+  <Icon {...props} name='moon-outline' />
+)
+
 function NavigationBar(props: Props){
   const [menuVisible, setMenuVisible] = React.useState(false);
   const toggleMenu = () => {
@@ -46,7 +50,7 @@ function NavigationBar(props: Props){
         visible={menuVisible}
         onBackdropPress={toggleMenu}>
         <MenuItem accessoryLeft={InfoIcon} title='About'/>
-        <MenuItem accessoryLeft={LogoutIcon} title={props.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={props.toggleDarkMode} />
+        <MenuItem accessoryLeft={DarkModeIcon} title={props.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={props.toggleDarkMode} />
         <MenuItem accessoryLeft={LogoutIcon} title='Sperren' onPress={props.signOutCallback} />
       </OverflowMenu>
     </React.Fragment>

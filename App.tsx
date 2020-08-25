@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text, TopNavigation, IconRegistry, ListItem } from '@ui-kitten/components';
 import { BucketListScreen } from './src/screens/bucket_list';
-import { StatusBar, View } from 'react-native';
 import { NavigationBar } from './src/components/navigation_bar';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { asyncStorageKeys } from './src/asyncStorageKeys';
@@ -10,6 +9,7 @@ import { PasswordScreen } from './src/screens/password';
 import { NewListItemModal } from './src/screens/new_list_item';
 import { BucketListItem } from './src/BucketListItem';
 import AsyncStorage from '@react-native-community/async-storage';
+import { StatusBar, setStatusBarStyle } from 'expo-status-bar';
 
 export default function App() {
   const [ listItems, setListItems ] = useState<BucketListItem[]>([])
@@ -88,6 +88,13 @@ export default function App() {
 
   const [ darkMode, setDarkMode ] = useState(false)
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
+  useEffect(() => {
+    setStatusBarStyle(darkMode ? 'dark' : 'light')
+  }, [darkMode])
+
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
@@ -100,7 +107,7 @@ export default function App() {
               signOutCallback={signOut} 
               onPressAdd={openModal} 
               darkMode={darkMode}
-              toggleDarkMode={() => {setDarkMode(!darkMode)}}
+              toggleDarkMode={toggleDarkMode}
             />
             <BucketListScreen 
               modalVisible={newListItemModal} 
