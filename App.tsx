@@ -9,7 +9,7 @@ import { PasswordScreen } from './src/screens/password'
 import { NewListItemModal } from './src/components/new_list_item_modal'
 import { BucketListItem } from './src/BucketListItem'
 import AsyncStorage from '@react-native-community/async-storage'
-import { StatusBar, setStatusBarStyle } from 'expo-status-bar'
+import { setStatusBarStyle } from 'expo-status-bar'
 
 export default function App() {
   const [ listItems, setListItems ] = useState<BucketListItem[]>([])
@@ -44,7 +44,6 @@ export default function App() {
   const openModal = () => {
     setNewListItemModal(true)
   }
-
   const closeModal = () => {
     setNewListItemModal(false)
   }
@@ -55,7 +54,7 @@ export default function App() {
     listItems.forEach(el => {
       const listItem: BucketListItem = { ...el } 
       if (el.id === id){
-        listItem.performed = !listItem.performed
+        listItem.completed = !listItem.completed
       } 
       newListItems.push(listItem)
     })
@@ -73,25 +72,21 @@ export default function App() {
       id: Math.random(), 
       title: title, 
       conditions: conditions, 
-      performed: false,
+      completed: false,
     }
 
     const newListItems = [ listItem, ...listItems ]
 
     setListItems(newListItems)
-    // updateStorageListItems(JSON.stringify(newListItems))
     await AsyncStorage.setItem(asyncStorageKeys.listItems, JSON.stringify(newListItems))
-    console.log('new list items')
-    console.log(JSON.stringify(newListItems))
     closeModal()
   } 
 
   const [ darkMode, setDarkMode ] = useState(false)
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
-
+  // change status bar style when dark mode is enabled/disabled
   useEffect(() => {
     setStatusBarStyle(!darkMode ? 'dark' : 'light')
   }, [darkMode])

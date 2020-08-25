@@ -29,7 +29,8 @@ function NavigationBar(props: Props){
       <OverflowMenu
         anchor={renderMenuAction}
         visible={menuVisible}
-        onBackdropPress={toggleMenu}>
+        onBackdropPress={toggleMenu}
+      >
         <MenuItem accessoryLeft={InfoIcon} title='About'/>
         <MenuItem accessoryLeft={DarkModeIcon} title={props.darkMode ? 'Light Mode' : 'Dark Mode'} onPress={props.toggleDarkMode} />
         <MenuItem accessoryLeft={LogoutIcon} title='Sperren' onPress={props.signOutCallback} />

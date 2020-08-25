@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, ScrollView } from 'react-native'
 import { withStyles, Layout, ListItem, List, EvaProp, Divider, CheckBox, Toggle } from '@ui-kitten/components'
-import { BucketListItem } from '../BucketListItem';
+import { BucketListItem } from '../BucketListItem'
 
 interface Props {
   modalVisible: boolean
@@ -28,7 +28,7 @@ function BucketListScreen(props: Props){
     const renderedItems: any[] = []
 
     props.listItems.forEach((el, i) => {
-      if (el.performed && !showExecuted){
+      if (el.completed && !showExecuted){
         return 
       }
       renderedItems.push(renderItem({ item: el, index: i}))
@@ -41,7 +41,7 @@ function BucketListScreen(props: Props){
   const renderAccessory = (accessoryProps: any, item: BucketListItem) => (
     <CheckBox
       {...accessoryProps}
-      checked={item.performed}
+      checked={item.completed}
       onChange={() => props.onCheckListItem(item.id)}
     /> 
   )
