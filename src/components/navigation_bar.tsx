@@ -1,7 +1,20 @@
 import React from 'react'
-import { withStyles, TopNavigation, EvaProp, TopNavigationAction, Icon, OverflowMenu, MenuItem } from '@ui-kitten/components'
+import { 
+  withStyles, 
+  TopNavigation, 
+  EvaProp, 
+  TopNavigationAction, 
+  OverflowMenu, 
+  MenuItem 
+} from '@ui-kitten/components'
 import { StatusBar } from 'react-native'
-import { MenuIcon, EditIcon, DarkModeIcon, InfoIcon, LogoutIcon } from './icon_components';
+import { 
+  MenuIcon, 
+  EditIcon, 
+  DarkModeIcon, 
+  InfoIcon, 
+  LogoutIcon 
+} from './icon_components';
 
 interface Props {
   signOutCallback: () => void
