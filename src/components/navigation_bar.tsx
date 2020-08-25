@@ -1,6 +1,7 @@
 import React from 'react'
 import { withStyles, TopNavigation, EvaProp, TopNavigationAction, Icon, OverflowMenu, MenuItem } from '@ui-kitten/components'
 import { StatusBar } from 'react-native'
+import { MenuIcon, EditIcon, DarkModeIcon, InfoIcon, LogoutIcon } from './icon_components';
 
 interface Props {
   signOutCallback: () => void
@@ -11,26 +12,6 @@ interface Props {
 
   eva?: EvaProp
 }
-
-const EditIcon = (props: any) => (
-  <Icon {...props} name='plus'/>
-)
-
-const MenuIcon = (props: any) => (
-  <Icon {...props} name='more-vertical'/>
-)
-
-const InfoIcon = (props: any) => (
-  <Icon {...props} name='info'/>
-)
-
-const LogoutIcon = (props: any) => (
-  <Icon {...props} name='log-out'/>
-)
-
-const DarkModeIcon = (props:any) => (
-  <Icon {...props} name='moon-outline' />
-)
 
 function NavigationBar(props: Props){
   const [menuVisible, setMenuVisible] = React.useState(false);
