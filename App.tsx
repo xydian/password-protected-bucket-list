@@ -91,8 +91,9 @@ export default function App() {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
+
   useEffect(() => {
-    setStatusBarStyle(darkMode ? 'dark' : 'light')
+    setStatusBarStyle(!darkMode ? 'dark' : 'light')
   }, [darkMode])
 
   return (
