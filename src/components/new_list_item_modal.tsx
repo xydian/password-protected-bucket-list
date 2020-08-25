@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { withStyles, Modal, EvaProp, Card, Text, Button, Input } from '@ui-kitten/components'
 import { View } from 'react-native'
+import { useKeyboard } from '@react-native-community/hooks'
 
 interface Props {
   visible: boolean
@@ -14,12 +15,14 @@ function NewListItemModal(props: Props){
   const [ title, setTitle ] = useState('')
   const [ conditions, setConditions ] = useState('')
 
+  const keyboard = useKeyboard()
+
   return (
     <Modal
       visible={props.visible}
       backdropStyle={props.eva.style.backdrop}
       onBackdropPress={props.closeCallback}
-      style={{width: '90%'}}
+      style={{width: '90%', paddingBottom: keyboard.keyboardShown ? keyboard.keyboardHeight : 0}}
     >
       <Card disabled={true}>
         <Text style={{marginBottom: 12}}>Neues Item hinzufügen</Text>

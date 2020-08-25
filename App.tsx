@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text, TopNavigation, IconRegistry, ListItem } from '@ui-kitten/components';
-import { BucketListScreen } from './src/screens/bucket_list';
-import { NavigationBar } from './src/components/navigation_bar';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { asyncStorageKeys } from './src/asyncStorageKeys';
-import { PasswordScreen } from './src/screens/password';
-import { NewListItemModal } from './src/components/new_list_item_modal';
-import { BucketListItem } from './src/BucketListItem';
-import AsyncStorage from '@react-native-community/async-storage';
-import { StatusBar, setStatusBarStyle } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react'
+import * as eva from '@eva-design/eva'
+import { ApplicationProvider, Layout, Text, TopNavigation, IconRegistry, ListItem } from '@ui-kitten/components'
+import { BucketListScreen } from './src/screens/bucket_list'
+import { NavigationBar } from './src/components/navigation_bar'
+import { EvaIconsPack } from '@ui-kitten/eva-icons'
+import { asyncStorageKeys } from './src/asyncStorageKeys'
+import { PasswordScreen } from './src/screens/password'
+import { NewListItemModal } from './src/components/new_list_item_modal'
+import { BucketListItem } from './src/BucketListItem'
+import AsyncStorage from '@react-native-community/async-storage'
+import { StatusBar, setStatusBarStyle } from 'expo-status-bar'
 
 export default function App() {
   const [ listItems, setListItems ] = useState<BucketListItem[]>([])
