@@ -13,6 +13,7 @@ import { setStatusBarStyle } from 'expo-status-bar'
 import { Provider, useSelector } from 'react-redux' 
 import { store, RootState } from './src/redux/store'
 import { AppState } from './src/redux/appReducer'
+import { ToastAndroid } from 'react-native'
  
 export default function AppProvider(){
   return (
@@ -86,6 +87,8 @@ export function App() {
 
     setListItems(newListItems)
     AsyncStorage.setItem(asyncStorageKeys.listItems, JSON.stringify(newListItems))
+
+    ToastAndroid.show("Eintrag wurde gelöscht", ToastAndroid.LONG)
   }
 
   const onPressListItem = (id: number) => {}

@@ -20,3 +20,7 @@ export const LogoutIcon = (props: any) => (
 export const DarkModeIcon = (props:any) => (
   <Icon {...props} name='moon-outline' />
 )
+
+export const HelpIcon = (props:any) => (
+  <Icon {...props} name='question-mark-circle-outline' />
+)
