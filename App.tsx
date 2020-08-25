@@ -10,7 +10,9 @@ import { NewListItemModal } from './src/components/new_list_item_modal'
 import { BucketListItem } from './src/BucketListItem'
 import AsyncStorage from '@react-native-community/async-storage'
 import { setStatusBarStyle } from 'expo-status-bar'
-
+import { Provider } from 'react-redux' 
+import { store } from './src/redux/store'
+ 
 export default function App() {
   const [ listItems, setListItems ] = useState<BucketListItem[]>([])
 
@@ -92,7 +94,7 @@ export default function App() {
   }, [darkMode])
 
   return (
-    <>
+    <Provider store={store}>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={darkMode ? eva.dark : eva.light}>
         {!signedIn ? 
@@ -122,6 +124,6 @@ export default function App() {
           </Layout>
         }
       </ApplicationProvider>
-    </>
-  );
+    </Provider>
+  )
 }
