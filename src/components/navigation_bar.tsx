@@ -14,19 +14,19 @@ interface Props {
 
 const EditIcon = (props: any) => (
   <Icon {...props} name='plus'/>
-);
+)
 
 const MenuIcon = (props: any) => (
   <Icon {...props} name='more-vertical'/>
-);
+)
 
 const InfoIcon = (props: any) => (
   <Icon {...props} name='info'/>
-);
+)
 
 const LogoutIcon = (props: any) => (
   <Icon {...props} name='log-out'/>
-);
+)
 
 const DarkModeIcon = (props:any) => (
   <Icon {...props} name='moon-outline' />
@@ -36,11 +36,11 @@ function NavigationBar(props: Props){
   const [menuVisible, setMenuVisible] = React.useState(false);
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
-  };
+  }
 
   const renderMenuAction = () => (
     <TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
-  );
+  )
 
   const renderRightActions = () => (
     <React.Fragment>

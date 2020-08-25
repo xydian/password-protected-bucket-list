@@ -6,7 +6,7 @@ import { NavigationBar } from './src/components/navigation_bar';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { asyncStorageKeys } from './src/asyncStorageKeys';
 import { PasswordScreen } from './src/screens/password';
-import { NewListItemModal } from './src/screens/new_list_item';
+import { NewListItemModal } from './src/components/new_list_item_modal';
 import { BucketListItem } from './src/BucketListItem';
 import AsyncStorage from '@react-native-community/async-storage';
 import { StatusBar, setStatusBarStyle } from 'expo-status-bar';
