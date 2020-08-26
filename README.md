@@ -25,6 +25,6 @@ Otherwise you could also use an Android Emulator. If you need help setting it up
 
 ## Demo
 
-Disclaimer: This gif looks slightly different than it does on a real device due to github limitations in resizing gifs
+Disclaimer: The colors on this gif look slightly different than they do on a real device due to github limitations in resizing gifs
 
 <img src="https://github.com/xydian/password-protected-bucket-list/blob/master/assets/demo.gif" data-canonical-src="https://github.com/xydian/password-protected-bucket-list/blob/master/assets/demo.gif" height="600" />
