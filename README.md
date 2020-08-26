@@ -23,3 +23,6 @@ Otherwise you could also use an Android Emulator. If you need help setting it up
 - [React Redux](https://redux.js.org/) 
 - [UI Kitten](https://akveo.github.io/react-native-ui-kitten/) 5.0
 
+## Demo
+
+![](assets/demo.gif)
